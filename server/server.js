@@ -1,20 +1,19 @@
+require("dotenv").config();
 const express = require("express");
+const connectDB = require("./config/db");
 const app = express();
 
+app.use(express.json());
+
+connectDB();
+
 app.set("view engine", "ejs");
+app.use("/api/tasks", require("./routes/taskRoutes"));
 
-app.get("/", (req, res) => {
-  console.log("Here");
-  console.log("Here1");
-  console.log("Here11");
-
-  res.render("index", { text: "World" });
-});
-
-const userRouter = require("./routes/users");
+//const userRouter = require("./routes/users");
 // const postRouter = require("./routes/posts");
 
-app.use("/users", userRouter);
+//app.use("/users", userRouter);
 // app.use("/posts", postRouter);
 
 app.listen(3000);
